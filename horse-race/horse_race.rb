@@ -48,23 +48,56 @@ p HORSES[winner_horse_index]
 puts "You lost!! SO sorry but the winner was #{HORSES[winner_horse_index]} and your balance is now #{balance}"
 
 
+#=================================== CODIGO COMPLETO ======================================================
 
+# Define the horses
+horses = ["Joe the Brave", "Black Stalion", "Ronny the Rat", "Tony Macaroni"]
 
+# Define the initial user balance
+balance = 100
 
+# Display a welcome message
+puts "Welcome to the horse race!"
+puts "--------------------------"
 
+# Start the loop
+# Condition to loop: the user has at least 10 in his balance
+while balance >= 10
 
-#ALE
-# runner = gets.chomp.capitalize
-# puts 'how much would you like to bet?'
+  # Display the names of the horses that are running, with a number starting from 1
+  puts "---------------------"
+  puts "Today our horses are:"
+  horses.each_with_index do |horse, index|
+    puts "#{index + 1} - #{horse}"
+  end
 
-# bet = gets.chomp.to_i
+  # Ask the user which horse he wants to bet on
+  puts "Which horse do you want to bet on?"
+  print "> "
 
-# puts "You runner is #{runner}, confirm [y|n]"
-# puts 
+  # Shift the user choice by -1 to get his horse index
+  user_horse_index = gets.chomp.to_i - 1
 
-# 8. display horse name (by index) with bet (optinal)
-# 9. sample to randomly display a horse winner
-# 10. compute win or loss
-# 11. play an end game msg
+  # Display the name of the horse that the user bet on
+  puts "You chose: #{horses[user_horse_index]}"
 
-# puts sample_horse('Black Stallion')
+  # Run the race: randomly select the winner horse index
+  winner_horse_index = rand(0...horses.length)
+
+  # Compute the result: compare the index of the horse of the user with the winner horse index
+  if user_horse_index == winner_horse_index
+
+    # If the user won, add 50 to his balance and display the winning message
+    balance += 50
+    puts "You won! Your balance is now #{balance}€"
+  else
+
+    # If the user lost, substract 10 to his balance and display the losing message
+    balance -= 10
+    puts "You lost! The winner was #{horses[winner_horse_index]} Your balance is now #{balance}€"
+  end
+end
+
+# Display an exit message
+puts "-----------------------------------------"
+puts "Thank you for playing! See you next time!"
